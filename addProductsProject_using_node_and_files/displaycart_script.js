@@ -1,4 +1,4 @@
-var nn=document.getElementById("welcome");
+var nn=document.getElementById("welcome"); //welcome
 var active_account=getactiveaccount();
 nn.textContent="hi "+active_account.name+"!";
 var account=active_account.email;
