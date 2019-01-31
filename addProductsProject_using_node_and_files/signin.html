@@ -1,0 +1,211 @@
+<html>
+<title>
+    login
+</title> 
+    <body>
+        <div style=" margin-top:200px;margin-left: 600px ;padding:40px 50px;float:left;width:25%;background-color:antiquewhite; "id="div_form"></div>
+        
+        <script>
+            
+             STATUS_OK=200;
+            var account;
+            
+            
+            
+            createsigninform();
+            
+             function createsigninform()
+            {
+                var main=document.getElementById("div_form");
+                var div1 = document.createElement("div");
+                var div2 = document.createElement("div");
+                var div3 = document.createElement("div");
+                var input1 = document.createElement("input");
+                var input2 = document.createElement("input");
+                var button1 = document.createElement("button");
+                var button2 = document.createElement("button");
+                div1.setAttribute("id","div1");
+                div2.setAttribute("id","div2");
+                input1.setAttribute("id","input1");
+                input2.setAttribute("id","input2");
+                input1.setAttribute("style","border: 1px solid #555;width: 100%;height: 20px;padding: 18px 15px;");
+                input2.setAttribute("style","border: 1px solid #555;width: 100%;height: 20px;padding: 18px 15px;");
+                input1.setAttribute("type","text");
+                input2.setAttribute("type","password");
+                input1.setAttribute("placeholder","enter username");
+                input2.setAttribute("placeholder","enter password");
+                input2.value="";
+                button1.textContent="Sign In";
+                button2.textContent="Cancel";
+                
+                div1.appendChild(input1);
+                var breakLine=document.createElement("br");
+                div1.appendChild(breakLine);
+                var breakLine=document.createElement("br");
+                div1.appendChild(breakLine);
+                
+                div2.appendChild(input2);
+                var breakLine=document.createElement("br");
+                div2.appendChild(breakLine);
+                var breakLine=document.createElement("br");
+                div2.appendChild(breakLine);
+                
+                div3.appendChild(button1);
+                div3.appendChild(button2);
+                button1.setAttribute("style","padding:12px 22px;background-color:green;color:white;font-size: 16px;margin-left:60px");
+                button2.setAttribute("style","padding:12px 22px;background-color:red;color:white;font-size: 16px;margin-left:20px");
+                
+                main.appendChild(div1);
+                main.appendChild(div2);
+                main.appendChild(div3);
+                
+                 button1.addEventListener("click", function(event) 
+                   {
+                    checksignin(function(name){
+                        
+                           alert("name"+name);
+                            if(name!=false)
+                            {
+                            alert("signed in successfully "+name);
+                                ob=makeObject(name,input1.value);
+                                storeactiveaccount(ob);
+                            document.location.href = "product_list.html";
+                            }
+                           else
+                               alert("failed");
+                         });
+                   });
+                  
+
+                  button2.addEventListener("click", function(event) 
+                   { 
+                      document.location.href = "account.html";
+        
+                   });
+            }
+            
+    function checksignin(callback2)
+     {
+        //alert("flag in check="+flag);
+        var i1=document.getElementById("input1");
+        var i2=document.getElementById("input2");
+        var d1=document.getElementById("div1");
+        var d2=document.getElementById("div2");
+         
+        if(d1.childNodes[1] && d1.childNodes[1].getAttribute("class")=="error")
+            d1.removeChild(d1.childNodes[1]);
+        if(d2.childNodes[1] && d2.childNodes[1].getAttribute("class")=="error")
+            d2.removeChild(d2.childNodes[1]);
+            
+         
+         findAccount(i1.value,i2.value,function(res){
+             
+         cleared=1;
+         var message;
+
+         //alert(res);
+         if(res==false)
+             {
+                 cleared=0;
+                 message="Wrong email or password";
+             }
+         
+         if(cleared==0)
+             {
+                        
+                 i2.value="";
+                 
+                        var error=document.createElement("label");
+                        var text = document.createTextNode(message);
+                        error.appendChild(text);
+                        error.style.color="red";
+                        error.setAttribute("class","error");
+                 
+                          divi=document.getElementById("div2"); 
+                 
+                        divi.insertBefore(error, divi.childNodes[1]);
+             }
+         
+             callback2(res);
+         });
+        }
+             
+             
+        function findAccount(email,pass,callback1)
+        {
+            var request=new XMLHttpRequest();
+            var name=false;
+            
+            
+            request.addEventListener('load',function()
+             {
+                if(request.status===STATUS_OK)
+                    {
+                        name=JSON.parse(request.responseText); 
+                        alert("yes");
+                        alert(name);
+                    }
+                alert("yes"+name);
+                callback1(name);
+            });
+            
+            request.open("POST",'/checkLOGINuseraccounts');
+            request.send(JSON.stringify({email:email,password:pass}));
+            alert("wait");
+            
+        }
+         
+            
+            function makeObject(name,email)
+            {
+                alert(email);
+                alert(name);
+                return ob={
+                    name:name,
+                    email:email
+                };
+            };
+            
+            function storeactiveaccount(active_account)
+            {
+            sessionStorage.active_account = JSON.stringify(active_account);
+            }
+            
+             
+        </script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

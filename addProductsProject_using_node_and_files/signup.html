@@ -1,0 +1,315 @@
+<html>
+<title>
+    signup
+</title>
+    <body>
+        <div style=" margin-top:200px;margin-left: 600px ;padding:10px 10px "id="div_form"></div>
+        
+        <script>
+            
+            STATUS_OK=200;
+            
+            
+            createsignupform();
+            
+        function createsignupform()
+            {
+                var main=document.getElementById("div_form");
+                var div1 = document.createElement("div");
+                var div2 = document.createElement("div");
+                var div3 = document.createElement("div");
+                var div4 = document.createElement("div");
+                var div5 = document.createElement("div");
+                var div6 = document.createElement("div");
+                var input1 = document.createElement("input");
+                var input2 = document.createElement("input");
+                var input3 = document.createElement("input");
+                var input4 = document.createElement("input");
+                var input5 = document.createElement("input");
+                div1.setAttribute("id","div1");
+                div2.setAttribute("id","div2");
+                div3.setAttribute("id","div3");
+                div4.setAttribute("id","div4");
+                div5.setAttribute("id","div5");
+                input1.setAttribute("id","input1");
+                input2.setAttribute("id","input2");
+                input3.setAttribute("id","input3");
+                input4.setAttribute("id","input4");
+                input5.setAttribute("id","input5");
+                input1.setAttribute("style","border: 1px solid #555;width: 30%;height: 10px;padding: 12px 10px;");
+                input2.setAttribute("style","border: 1px solid #555;width: 30%;height: 10px;padding: 12px 10px;");
+                input3.setAttribute("style","border: 1px solid #555;width: 30%;height: 10px;padding: 12px 10px;");
+                input4.setAttribute("style","border: 1px solid #555;width: 30%;height: 10px;padding: 12px 10px;");
+                input5.setAttribute("style","border: 1px solid #555;width: 30%;height: 10px;padding: 12px 10px;");
+                input1.setAttribute("type","text");
+                input2.setAttribute("type","text");
+                input3.setAttribute("type","password");
+                input4.setAttribute("type","password");
+                input5.setAttribute("type","text");
+                input1.setAttribute("placeholder","enter name");
+                input2.setAttribute("placeholder","enter email-id");
+                input3.setAttribute("placeholder","enter password");
+                input4.setAttribute("placeholder","confirm password");
+                input5.setAttribute("placeholder","enter complete address");
+                var button1 = document.createElement("button");
+                var button2 = document.createElement("button");
+                button1.textContent="Sign Up";
+                button2.textContent="Cancel";
+                
+                div1.appendChild(input1);
+                var breakLine=document.createElement("br");
+                div1.appendChild(breakLine);
+                var breakLine=document.createElement("br");
+                div1.appendChild(breakLine);
+                
+                div2.appendChild(input2);
+                var breakLine=document.createElement("br");
+                div2.appendChild(breakLine);
+                var breakLine=document.createElement("br");
+                div2.appendChild(breakLine);
+                
+                div3.appendChild(input3);
+                var breakLine=document.createElement("br");
+                div3.appendChild(breakLine);
+                var breakLine=document.createElement("br");
+                div3.appendChild(breakLine);
+                
+                div4.appendChild(input4);
+                var breakLine=document.createElement("br");
+                div4.appendChild(breakLine);
+                var breakLine=document.createElement("br");
+                div4.appendChild(breakLine);
+                
+                div5.appendChild(input5);
+                var breakLine=document.createElement("br");
+                div5.appendChild(breakLine);
+                var breakLine=document.createElement("br");
+                div5.appendChild(breakLine);
+                
+                div6.appendChild(button1);
+                div6.appendChild(button2);
+                button1.setAttribute("style","padding:12px 22px;background-color:green;color:white;font-size: 16px;margin-left:25px");
+                button2.setAttribute("style","padding:12px 22px;background-color:red;color:white;font-size: 16px;margin-left:15px");
+                main.appendChild(div1);
+                main.appendChild(div2);
+                main.appendChild(div3);
+                main.appendChild(div4);
+                main.appendChild(div5);
+                main.appendChild(div6);
+                
+                  button1.addEventListener("click", function(event) 
+                   {
+                      checksignup(function(flag){
+                          alert("flag="+flag);
+                          if(flag==true)
+                          {
+                              addin_accounts();
+                          }
+                          else
+                              alert("account with this email already exist");
+                          });
+                   });
+                  
+
+                  button2.addEventListener("click", function(event) 
+                   {
+                      
+                      document.location.href = "account.html";
+        
+                   });
+                
+            }
+            
+            
+            
+    function checksignup(callback2)
+     {
+        //alert("flag in check="+flag);
+        var i1=document.getElementById("input1");
+        var i2=document.getElementById("input2");
+        var i3=document.getElementById("input3");
+        var i4=document.getElementById("input4");
+        var i5=document.getElementById("input5");
+        //var flag=0;
+        if(i1.parentNode.childNodes[1] && i1.parentNode.childNodes[1].getAttribute("class")=="error")
+            i1.parentNode.removeChild(i1.parentNode.childNodes[1]);
+        if(i2.parentNode.childNodes[1] && i2.parentNode.childNodes[1].getAttribute("class")=="error")
+            i2.parentNode.removeChild(i2.parentNode.childNodes[1]);
+        if(i3.parentNode.childNodes[1] && i3.parentNode.childNodes[1].getAttribute("class")=="error")
+            i3.parentNode.removeChild(i3.parentNode.childNodes[1]);
+        if(i4.parentNode.childNodes[1] && i4.parentNode.childNodes[1].getAttribute("class")=="error")
+            i4.parentNode.removeChild(i4.parentNode.childNodes[1]);
+         if(i5.parentNode.childNodes[1] && i5.parentNode.childNodes[1].getAttribute("class")=="error")
+            i5.parentNode.removeChild(i5.parentNode.childNodes[1]);
+        
+        var messages=[];
+        var letters = /^[A-Za-z]+$/;
+        var numbers = /^[0-9]+$/;
+        
+        if(i1.value=="")
+            {
+                messages.push("field cannot be left empty");
+            }
+        else if(!(i1.value.match(letters)))
+            {
+                messages.push("only characters allowed");
+            }
+        else
+            messages.push("clear");
+        //////////////////
+        
+        if(i2.value=="")
+            {
+                messages.push("field cannot be left empty");
+            }
+         else if(i2.value.indexOf("@")==-1 || !(i2.value.endsWith(".com")))
+            {
+                 messages.push("wrong email format");
+            }
+        else
+            messages.push("clear");
+         
+        //////////////
+        
+         if(i3.value=="")
+            {
+                messages.push("field cannot be left empty");
+            }
+         else if(i3.value.length<8)
+             {
+                 messages.push("length must be atleast 8")
+             }
+        else
+            messages.push("clear"); 
+         
+         ////////////
+         
+        if(i4.value=="")
+            {
+                messages.push("field cannot be left empty");
+            }
+         else if(i3.value!="" && i3.value!=i4.value)
+             {
+                 messages.push("password does not match;")
+             }
+        else
+            messages.push("clear");
+         //////////////
+         
+           if(i5.value=="")
+            {
+                messages.push("field cannot be left empty");
+            }
+        else
+            messages.push("clear");
+        
+        
+   var cleared=1;
+        for(var h=0;h<5;h++)
+            {
+                if(messages[h]!="clear")
+                    {
+                        cleared=0;
+                        var error=document.createElement("label");
+                        var text = document.createTextNode(messages[h]);
+                        error.appendChild(text);
+                        error.style.color="red";
+                        error.setAttribute("class","error");
+                        var divi;
+                        if(h==0)
+                          divi=document.getElementById("div1");
+                        else if(h==1)
+                          divi=document.getElementById("div2"); 
+                        else if(h==2)
+                          divi=document.getElementById("div3");
+                        else if(h==3)
+                          divi=document.getElementById("div4");
+                        else if(h==4)
+                          divi=document.getElementById("div5");
+                       
+                      divi.insertBefore(error, divi.childNodes[1]); 
+  
+                    }
+            }
+        //alert("flag="+flag);
+         alert(cleared);
+        if(cleared==0)
+            alert("please fill correctly the mentioned columns");
+         else
+         {
+             different_account(i2.value,function(flag){
+                     callback2(flag);
+             });
+         }
+        
+
+    }
+            
+            
+           
+            function different_account(email,callback1)
+            {
+                      var request=new XMLHttpRequest();
+                var flag=false;
+                
+                request.addEventListener('load',function()
+                 {
+                    if(request.status===STATUS_OK)
+                        {
+                            flag=JSON.parse(request.responseText); 
+                        }
+                    alert("yes"+flag);
+                    callback1(flag);
+                });
+                
+                request.open("POST",'/checkSIGNUPuseraccounts');
+                request.send(JSON.stringify(email));
+                alert("wait");
+            }
+            
+            
+            function addin_accounts()
+            {
+                 var i1=document.getElementById("input1");
+                 var i2=document.getElementById("input2");
+                 var i3=document.getElementById("input3");
+                 var i5=document.getElementById("input5");
+                 
+                var ob=getdata(i1.value,i2.value,i3.value,i5.value);
+                
+                request=new XMLHttpRequest();
+                
+                request.addEventListener('load',function()
+                {
+                    var ob=getdata(i1.value,i2.value,i3.value,i5.value);
+                if(request.status===STATUS_OK)
+                    {
+                        alert("signed up successfully");
+                        document.location.href = "account.html";
+                    }
+                    else
+                        alert("sign up failed");
+               });
+                
+                request.open("POST",'/adduseraccount');
+                request.send(JSON.stringify(ob));
+                
+            }
+            
+            function getdata(a,b,c,d)   /// object
+                {
+                    return acc={
+                        name:a,
+                        email:b,
+                        password:c,
+                        address:d
+                    }
+                }           
+            
+
+            
+            
+        </script>
+    </body>
+    
+</html>
