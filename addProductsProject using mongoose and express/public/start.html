@@ -1,0 +1,26 @@
+<html>
+<title>
+choose portal
+</title>
+<body>
+    <div style="text-align: center;color:cadetblue"><h1>CHOOSE YOUR PORTAL</h1></div>
+    <div style="margin-top: 300px;margin-left: 730px">
+        <button id="btn1" style="padding:15px 25px;background-color:darkred;color:white;font-size: 16px">Admin</button>
+        <button id="btn2" style="padding:15px 25px;background-color: #4CAF50;color:white;font-size: 16px;margin-left: 20px">Buyer</button>
+    </div>
+    
+    <script>
+        var b1=document.getElementById("btn1");
+        b1.addEventListener("click", function(event) 
+         {
+                document.location.href = "admin_account.html";
+         }); 
+        
+        var b2=document.getElementById("btn2");
+        b2.addEventListener("click", function(event) 
+         {
+            document.location.href = "account.html";
+         });
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<html>
+<title>
+signin/signup
+</title>
+<body>
+  <center><h1>ADMIN</h1></center>
+    <div style="margin-top: 270px;margin-left: 730px">
+        <button id="btn1" style="padding:10px 20px;background-color:darkred;color:white;font-size: 16px">Sign Up</button>
+        <button id="btn2" style="padding:10px 20px;background-color: #4CAF50;color:white;font-size: 16px;margin-left: 15px">Sign In</button>
+    </div>
+    
+    <script>
+        var b1=document.getElementById("btn1");
+        b1.addEventListener("click", function(event) 
+         {
+            document.location.href = "admin_signup.html";
+         });
+        
+        var b2=document.getElementById("btn2");
+        b2.addEventListener("click", function(event) 
+         {
+            document.location.href = "admin_signin.html";
+         });
+    </script>
+</body>
+</html>
